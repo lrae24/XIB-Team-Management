@@ -4,6 +4,9 @@ import com.xib.assessment.controller.models.Agent;
 import com.xib.assessment.controller.models.Team;
 import com.xib.assessment.repositories.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,13 @@ public class AgentService {
 
     public List<Agent> retrieveAllAgents(){
        List<Agent> agent = agentRepository.findAll();
+        return agent;
+    }
+
+
+    public Page<Agent> retrieveAllPaginatedAgents(int pageSize, int size){
+        Pageable pageable = PageRequest.of(pageSize,size);
+        Page<Agent> agent = agentRepository.findAll(pageable);
         return agent;
     }
 
