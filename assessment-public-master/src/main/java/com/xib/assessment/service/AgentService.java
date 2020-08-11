@@ -38,4 +38,8 @@ public class AgentService {
     public void saveAgent(Agent agent){
         agentRepository.save(agent);
     }
+    public void saveAgent(Agent agent, Team team){
+        agent.setTeam(team);
+        agentRepository.save(agent);
+    }
 }

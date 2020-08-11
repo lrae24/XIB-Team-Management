@@ -28,6 +28,13 @@ public class TeamsController {
     }
 
 
+    @GetMapping(path="teamsnoid", produces = "application/json")
+    public List<Team> findTeamsWithoutMangaer() {
+        List<Team> teams = teamService.retrieveAllTeams();
+        return teams;
+    }
+
+
     @PostMapping(path="team", consumes = "application/json")
     public void addTeam(@RequestBody Team team) {
       teamService.saveTeam(team);

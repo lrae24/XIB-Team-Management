@@ -3,6 +3,7 @@ package com.xib.assessment.controller;
 import com.xib.assessment.controller.models.Agent;
 import com.xib.assessment.controller.models.Team;
 import com.xib.assessment.service.AgentService;
+import com.xib.assessment.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,9 @@ public class AgentController {
 
     @Autowired
     AgentService agentService;
+
+    @Autowired
+    TeamService teamServive;
 
     @GetMapping(path="agent/{id}", produces = "application/json")
     public Agent findAgent(@PathVariable("id") Long id) {
@@ -37,5 +41,10 @@ public class AgentController {
     @PostMapping(path="agent", consumes = "application/json")
     public void addAgent(@RequestBody Agent agent) {
         agentService.saveAgent(agent);
+    }
+
+        @PutMapping(path="team/{id}/agent", consumes = "application/json")
+    public void addAgentTeam(@RequestBody Agent agent, @PathVariable("id") long id) {
+        agentService.saveAgent(agent, teamServive.retrieveTeam(id));
     }
 }
